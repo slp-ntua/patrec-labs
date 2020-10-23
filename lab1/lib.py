@@ -68,7 +68,7 @@ def digit_mean(X, y, digit):
 
 
 
-def digit_variance_at_pixel(X, y, digit, pixel=(10, 10)):
+def digit_variance(X, y, digit):
 	'''Calculates the variance for all instances of a specific digit
 
 	Args:
