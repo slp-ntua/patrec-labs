@@ -159,3 +159,86 @@ def evaluate_classifier(clf, X, y, folds=5):
 		(float): The 5-fold classification score (accuracy)
 	"""
 	raise NotImplementedError
+
+	
+class calculate_priors(X, y):
+	"""Return the a-priori probabilities for every class
+	
+	Args:
+		X (np.ndarray): Digits data (nsamples x nfeatures)
+		y (np.ndarray): Labels for dataset (nsamples)
+		
+	Returns:
+		(np.ndarray): (n_classes) Prior probabilities for every class
+	"""
+	raise NotImplementedError
+	
+
+
+class CustomNBClassifier(BaseEstimator, ClassifierMixin):  
+    """Custom implementation Naive Bayes classifier"""
+
+    def __init__(self, use_unit_variance=False):
+        self.X_mean_ = None
+	self.use_unit_variance = use_unit_variance
+
+
+    def fit(self, X, y):
+        """
+        This should fit classifier. All the "work" should be done here.
+        
+        Calculates self.X_mean_ based on the mean 
+        feature values in X for each class.
+        
+        self.X_mean_ becomes a numpy.ndarray of shape 
+        (n_classes, n_features)
+        
+        fit always returns self.
+        """
+        raise NotImplementedError
+        #return self
+
+
+    def predict(self, X):
+        """
+        Make predictions for X based on the
+        euclidean distance from self.X_mean_
+        """
+        raise NotImplementedError
+    
+    def score(self, X, y):
+        """
+        Return accuracy score on the predictions
+        for X based on ground truth y
+        """
+        raise NotImplementedError
+
+	
+class PytorchNNModel(BaseEstimator, ClassifierMixin):
+	def __init__(self, *args, **kwargs):
+        # WARNING: Make sure predict returns the expected (nsamples) numpy array not a torch tensor.
+		# TODO: initialize model, criterion and optimizer
+		self.model = ...
+		self.criterion = ...
+		self.optimizer = ...
+	    raise NotImplementedError
+        
+    def fit(self, X, y):
+        # TODO: split X, y in train and validation set and wrap in pytorch dataloaders
+        # Use self._eval_step for validation
+        train_loader = ...
+        val_loader = ...
+        # TODO: Train model
+        raise NotImplementedError
+    
+    def predict(self, X):    
+	    # TODO: wrap X in a test loader and evaluate
+        # Use self._eval_step
+        raise NotImplementedError
+    
+    def score(self, X, y):
+        # Return accuracy score.
+        raise NotImplementedError
+		     
+		     
+		     
