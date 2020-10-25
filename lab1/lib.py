@@ -160,7 +160,7 @@ def evaluate_classifier(clf, X, y, folds=5):
     """
     raise NotImplementedError
 
-
+    
 class calculate_priors(X, y):
     """Return the a-priori probabilities for every class
 
@@ -238,3 +238,50 @@ class PytorchNNModel(BaseEstimator, ClassifierMixin):
     def score(self, X, y):
         # Return accuracy score.
         raise NotImplementedError
+
+        
+def evaluate_linear_svm_classifier(X, y, folds=5):
+    """ Create an svm with linear kernel and evaluate it using cross-validation
+    Calls evaluate_classifier
+    """
+    raise NotImplementedError
+
+def evaluate_rbf_svm_classifier(X, y, folds=5):
+    """ Create an svm with rbf kernel and evaluate it using cross-validation
+    Calls evaluate_classifier
+    """
+    raise NotImplementedError
+
+
+def evaluate_knn_classifier(X, y, folds=5):
+    """ Create a knn and evaluate it using cross-validation
+    Calls evaluate_classifier
+    """
+    raise NotImplementedError
+    
+
+def evaluate_sklearn_nb_classifier(X, y, folds=5):
+    """ Create an sklearn naive bayes classifier and evaluate it using cross-validation
+    Calls evaluate_classifier
+    """
+    raise NotImplementedError
+    
+    
+def evaluate_custom_nb_classifier(X, y, folds=5):
+    """ Create a custom naive bayes classifier and evaluate it using cross-validation
+    Calls evaluate_classifier
+    """
+    raise NotImplementedError
+    
+    
+def evaluate_euclidean_classifier(X, y, folds=5):
+    """ Create a euclidean classifier and evaluate it using cross-validation
+    Calls evaluate_classifier
+    """
+    raise NotImplementedError
+    
+def evaluate_nn_classifier(X, y, folds=5):
+    """ Create a pytorch nn classifier and evaluate it using cross-validation
+    Calls evaluate_classifier
+    """
+    raise NotImplementedError    
