@@ -285,3 +285,19 @@ def evaluate_nn_classifier(X, y, folds=5):
     Calls evaluate_classifier
     """
     raise NotImplementedError    
+
+    
+
+def evaluate_voting_classifier(X, y, folds=5):
+    """ Create a voting ensemble classifier and evaluate it using cross-validation
+    Calls evaluate_classifier
+    """
+    raise NotImplementedError
+    
+    
+
+def evaluate_bagging_classifier(X, y, folds=5):
+    """ Create a bagging ensemble classifier and evaluate it using cross-validation
+    Calls evaluate_classifier
+    """
+    raise NotImplementedError
