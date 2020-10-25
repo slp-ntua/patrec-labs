@@ -225,7 +225,6 @@ class PytorchNNModel(BaseEstimator, ClassifierMixin):
         
     def fit(self, X, y):
         # TODO: split X, y in train and validation set and wrap in pytorch dataloaders
-        # Use self._eval_step for validation
         train_loader = ...
         val_loader = ...
         # TODO: Train model
@@ -233,7 +232,7 @@ class PytorchNNModel(BaseEstimator, ClassifierMixin):
     
     def predict(self, X):    
 	    # TODO: wrap X in a test loader and evaluate
-        # Use self._eval_step
+        test_loader = ...
         raise NotImplementedError
     
     def score(self, X, y):
