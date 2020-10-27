@@ -161,7 +161,7 @@ def evaluate_classifier(clf, X, y, folds=5):
     raise NotImplementedError
 
     
-class calculate_priors(X, y):
+def calculate_priors(X, y):
     """Return the a-priori probabilities for every class
 
     Args:
