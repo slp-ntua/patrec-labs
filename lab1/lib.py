@@ -179,8 +179,7 @@ class CustomNBClassifier(BaseEstimator, ClassifierMixin):
     """Custom implementation Naive Bayes classifier"""
 
     def __init__(self, use_unit_variance=False):
-        self.X_mean_ = None
-    self.use_unit_variance = use_unit_variance
+        self.use_unit_variance = use_unit_variance
 
 
     def fit(self, X, y):
