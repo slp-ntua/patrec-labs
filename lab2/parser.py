@@ -28,16 +28,17 @@ def parser(directory):
     # Print dataset info
     print('Total wavs: {}'.format(len(frames)))
 
-    # Standardize data
+    # Split to train-test
+    X_train, y_train, spk_train = [], [], []
+    X_test, y_test, spk_test = [], [], []
+    test_indices = ['0', '1', '2', '3', '4']
+
+    # Standardize on train data
     scaler = StandardScaler()
     scaler.fit(np.concatenate(frames))
     for i in range(len(frames)):
         frames[i] = scaler.transform(frames[i])
 
-    # Split to train-test
-    X_train, y_train, spk_train = [], [], []
-    X_test, y_test, spk_test = [], [], []
-    test_indices = ['0', '1', '2', '3', '4']
     for idx, frame, label, spk in zip(ids, frames, y, speakers):
         if str(idx) in test_indices:
             X_test.append(frame)
