@@ -79,6 +79,7 @@ def make_scale_fn(X_train):
 
         for frames in X:
             scaled.append(scaler.transform(frames))
+        return scaled
     return scale
 
 
