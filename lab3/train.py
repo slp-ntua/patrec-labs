@@ -24,7 +24,7 @@ def validation_loop(model, val_dataloader, device="cuda"):
 def overfit_with_a_couple_of_batches(model, train_dataloader):
     epochs = 10000  # An absurd number of epochs
     # TODO: select a couple of batches from the dataloader
-    # TODO: Run the ttraining loop for an absurd amount of epochs
+    # TODO: Run the training loop for an absurd amount of epochs
     raise NotImplementedError("You need to implement this")
 
 
