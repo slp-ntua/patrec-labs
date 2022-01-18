@@ -65,6 +65,7 @@ class LSTMBackbone(nn.Module):
         dropout=0.1,
     ):
         super(LSTMBackbone, self).__init__()
+        self.batch_first = True
         self.bidirectional = bidirectional
         self.feature_size = rnn_size * 2 if self.bidirectional else rnn_size
 
@@ -139,7 +140,7 @@ class LSTMBackbone(nn.Module):
         last_backward_out = backward[:, 0, :] if self.batch_first else backward[0, ...]
         # Last forward for real length or seq (unpadded tokens)
         last_forward_out = self._select_last_unpadded(forward, lengths)
-        out = self._merge_bi(forward, backward) if self.merge_bi != "cat" else out
+        out = self._merge_bi(forward, backward)
 
         return out, self._merge_bi(last_forward_out, last_backward_out)
 
