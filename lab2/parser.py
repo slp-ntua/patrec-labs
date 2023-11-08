@@ -37,9 +37,8 @@ def extract_features(wavs, n_mfcc=6, Fs=8000):
     step = window // 2
     frames = [
         librosa.feature.mfcc(
-            wav, Fs, n_fft=window, hop_length=window - step, n_mfcc=n_mfcc
+            y=wav, sr=Fs, n_fft=window, hop_length=window - step, n_mfcc=n_mfcc
         ).T
-
         for wav in tqdm(wavs, desc="Extracting mfcc features...")
     ]
 
@@ -74,12 +73,14 @@ def make_scale_fn(X_train):
     scaler.fit(np.concatenate(X_train))
     print("Normalization will be performed using mean: {}".format(scaler.mean_))
     print("Normalization will be performed using std: {}".format(scaler.scale_))
+
     def scale(X):
         scaled = []
 
         for frames in X:
             scaled.append(scaler.transform(frames))
         return scaled
+
     return scale
 
 
