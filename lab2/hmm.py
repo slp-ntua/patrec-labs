@@ -108,6 +108,7 @@ def train_hmms(train_dic, labels):
     hmms = {}  # create one hmm for each digit
 
     for dig in labels:
+        X, _, _, _ = train_dic[dig]
         # TODO: YOUR CODE HERE
         emission_model = ...
         hmms[dig] = ...
