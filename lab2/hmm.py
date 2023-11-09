@@ -120,12 +120,12 @@ def evaluate(hmms, dic, labels):
     for dig in labels:
         X, _, _, _ = dic[dig]
         for sample in X:
-            ev = []
-            for _ in labels:
-                sample = np.expand_dims(sample, 0)
+            ev = [0] * len(labels)
+            sample = np.expand_dims(sample, 0)
+            for digit, hmm in hmms.items():
                 # TODO: YOUR CODE HERE
                 logp = ...  # use the hmm.log_probability function
-                ev.append(logp)
+                ev[digit] = logp
 
             # TODO: YOUR CODE HERE
             predicted_digit = ...  # Calculate the most probable digit
