@@ -70,28 +70,28 @@ def initialize_and_fit_normal_distributions(X, n_states):
     return dists
 
 
-def initialize_transition_matrix():
+def initialize_transition_matrix(n_states):
     # TODO: YOUR CODE HERE
     # Make sure the dtype is np.float32
     return ...
 
 
-def initialize_starting_probabilities():
+def initialize_starting_probabilities(n_states):
     # TODO: YOUR CODE HERE
     # Make sure the dtype is np.float32
     return ...
 
 
-def initialize_end_probabilities():
+def initialize_end_probabilities(n_states):
     # TODO: YOUR CODE HERE
     # Make sure the dtype is np.float32
     return ...
 
 
-def train_single_hmm(X, emission_model, digit):
-    A = initialize_transition_matrix()
-    start_probs = initialize_starting_probabilities()
-    end_probs = initialize_end_probabilities()
+def train_single_hmm(X, emission_model, digit, n_states):
+    A = initialize_transition_matrix(n_states)
+    start_probs = initialize_starting_probabilities(n_states)
+    end_probs = initialize_end_probabilities(n_states)
     data = [x.astype(np.float32) for x in X]
 
     model = DenseHMM(
