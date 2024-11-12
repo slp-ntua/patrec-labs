@@ -52,12 +52,15 @@ def torch_train_val_split(
     return train_loader, val_loader
 
 
-def read_spectrogram(spectrogram_file, chroma=True):
-    # with open(spectrogram_file, "r") as f:
-    spectrograms = np.load(spectrogram_file)
-    # spectrograms contains a fused mel spectrogram and chromagram
-    # Decompose as follows
-    return spectrograms.T
+def read_spectrogram(spectrogram_file, feat_type):
+    spectrogram = np.load(spectrogram_file)
+    # spectrograms contains a fused mel spectrogram and chromagram    
+    if feat_type=='mel':
+        return spectrogram[:128, :].T
+    elif feat_type=='chroma':
+        return spectrogram[128:, :].T
+
+    return spectrogram.T
 
 
 class LabelTransformer(LabelEncoder):
@@ -95,15 +98,16 @@ class PaddingTransform(object):
 
 class SpectrogramDataset(Dataset):
     def __init__(
-        self, path, class_mapping=None, train=True, max_length=-1, regression=None
+        self, path, class_mapping=None, train=True, feat_type='mel', max_length=-1, regression=None
     ):
         t = "train" if train else "test"
         p = os.path.join(path, t)
         self.regression = regression
 
+        self.full_path = p
         self.index = os.path.join(path, "{}_labels.txt".format(t))
         self.files, labels = self.get_files_labels(self.index, class_mapping)
-        self.feats = [read_spectrogram(os.path.join(p, f)) for f in self.files]
+        self.feats = [read_spectrogram(os.path.join(p, f), feat_type) for f in self.files]
         self.feat_dim = self.feats[0].shape[1]
         self.lengths = [len(i) for i in self.feats]
         self.max_length = max(self.lengths) if max_length <= 0 else max_length
@@ -135,6 +139,13 @@ class SpectrogramDataset(Dataset):
             fname = l[0]
             if fname.endswith(".gz"):
                 fname = ".".join(fname.split(".")[:-1])
+            
+            # necessary fixes for the custom dataset used in the lab
+            if 'fma_genre_spectrograms_beat' in self.full_path.split('/'):
+                fname = fname.replace('beatsync.fused', 'fused.full')            
+            if 'test' in self.full_path.split('/'):
+                fname = fname.replace('full.fused', 'fused.full')
+            
             files.append(fname)
             labels.append(label)
         return files, labels
