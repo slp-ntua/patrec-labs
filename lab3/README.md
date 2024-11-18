@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 #### 4 - Create a Kaggle notebook and create a kernel
 
-- Go to the [tutorial kernel](https://www.kaggle.com/code/geoparslp/lab3-data-loading-tutorial)
+- Go to the [tutorial kernel](https://www.kaggle.com/code/pxaris/lab2-data-loading-tutorial)
 - Select `Copy & Edit` to create your own kernel
 - You may [fetch the code](https://www.kaggle.com/getting-started/71642)
 - implement the missing parts according to the lab instructions
