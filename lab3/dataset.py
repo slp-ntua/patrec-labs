@@ -98,11 +98,11 @@ class PaddingTransform(object):
 
 class SpectrogramDataset(Dataset):
     def __init__(
-        self, path, class_mapping=None, train=True, feat_type='mel', max_length=-1, regression=None
+        self, path, class_mapping=None, train=True, feat_type='mel', max_length=-1, regression_label_index=None
     ):
         t = "train" if train else "test"
         p = os.path.join(path, t)
-        self.regression = regression  # label index in annotations: 1 for 'valence', 2 for 'energy', 3 for 'danceability'
+        self.regression_label_index = regression_label_index  # label index in annotations: 1 for 'valence', 2 for 'energy', 3 for 'danceability'
 
         self.full_path = p
         self.index = os.path.join(path, "{}_labels.txt".format(t))
@@ -114,7 +114,7 @@ class SpectrogramDataset(Dataset):
         self.zero_pad_and_stack = PaddingTransform(self.max_length)
         self.label_transformer = LabelTransformer()
         if isinstance(labels, (list, tuple)):
-            if not regression:
+            if not regression_label_index:
                 self.labels = np.array(
                     self.label_transformer.fit_transform(labels)
                 ).astype("int64")
@@ -126,10 +126,10 @@ class SpectrogramDataset(Dataset):
             lines = [l.rstrip().split("\t") for l in fd.readlines()[1:]]
         files, labels = [], []
         for l in lines:
-            if self.regression:
+            if self.regression_label_index:
                 l = l[0].split(",")
                 files.append(l[0] + ".fused.full.npy")
-                labels.append(l[self.regression])
+                labels.append(l[self.regression_label_index])
                 continue
             label = l[1]
             if class_mapping:
