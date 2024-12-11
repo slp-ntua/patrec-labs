@@ -102,7 +102,7 @@ class SpectrogramDataset(Dataset):
     ):
         t = "train" if train else "test"
         p = os.path.join(path, t)
-        self.regression = regression
+        self.regression = regression  # label index in annotations: 1 for 'valence', 2 for 'energy', 3 for 'danceability'
 
         self.full_path = p
         self.index = os.path.join(path, "{}_labels.txt".format(t))
